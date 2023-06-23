@@ -51,18 +51,30 @@ function userUserFunction() {
 
     }
 }
+
 function logoutStorage() {
     localStorage.clear();
     // console.log("localStorage flushed");
 }
 
-// <li>-Element mit der Klasse 'nav-item' auswählen
-var navItem = document.querySelector('.nav-item');
+document.addEventListener('DOMContentLoaded', function() {
+    // setTimeout wird verwendet, um eine Verzögerung zu erzeugen und sicherzustellen, dass das <li>-Element vollständig geladen ist
+    setTimeout(function() {
+        // <li>-Element mit der Klasse 'nav-item' auswählen
+        var navItem = document.querySelector('.nav-item');
 
-// <i>-Element mit der Klasse 'bi-box-arrow-in-right' im <li>-Element finden
-var logoutButton = navItem.querySelector('.bi-box-arrow-in-right');
+        // Überprüfen, ob das <li>-Element gefunden wurde
+        if (navItem !== null) {
+            // <i>-Element mit der Klasse 'bi-box-arrow-in-right' im <li>-Element finden
+            var logoutButton = navItem.querySelector('.bi-box-arrow-in-right');
 
-// Klick-Ereignis dem Button hinzufügen
-logoutButton.addEventListener('click', function () {
-    logoutStorage();
+            // Überprüfen, ob das <i>-Element gefunden wurde
+            if (logoutButton !== null) {
+                // Klick-Ereignis dem Button hinzufügen
+                logoutButton.addEventListener('click', function () {
+                    logoutStorage();
+                });
+            }
+        }
+    }, 100);
 });
