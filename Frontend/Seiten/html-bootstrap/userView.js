@@ -1,6 +1,6 @@
 function userAdminFunction() {
     if (localStorage.getItem('user.type') === 'admin') {
-        var cssCode = ".bi-person { display:none; }";
+        var cssCode = ".bi-person { display:none; }" + ".usertxt {display: none;}";
         var styleElement = document.createElement('style');
         styleElement.type = 'text/css';
         console.log("Login - Admin");
@@ -19,7 +19,7 @@ function userAdminFunction() {
 function userNullFunction() {
     if (localStorage.getItem('user.type') === null) {
         var cssCode = ".bi-bag-dash { display:none; }" +
-            ".bi-box-arrow-in-right { display: none; }";
+            ".bi-box-arrow-in-right { display: none; }" + ".admintxt { display: none;}" + ".usertxt {display: none;}";
         var styleElement = document.createElement('style');
         styleElement.type = 'text/css';
         console.log("Not logged in");
@@ -36,7 +36,7 @@ function userNullFunction() {
 
 function userUserFunction() {
     if (localStorage.getItem('user.type') === 'user') {
-        var cssCode = ".bi-person { display:none; }";
+        var cssCode = ".bi-person { display:none; }" + ".admintxt { display: none;}";
         var styleElement = document.createElement('style');
         styleElement.type = 'text/css';
         console.log("Login - User");
@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Klick-Ereignis dem Button hinzufügen
                 logoutButton.addEventListener('click', function () {
                     logoutStorage();
+                    // location.reload();
                 });
             }
         }

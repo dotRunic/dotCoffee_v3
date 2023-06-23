@@ -24,6 +24,24 @@
 </head>
 
 <body>
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Element mit der Klasse "admintxt" auswählen
+            var adminTxtElement = document.querySelector('.admintxt');
+
+            // Überprüfen, ob das Element gefunden wurde
+            if (adminTxtElement !== null) {
+                // Aktuelle Seiten-URL abrufen
+                var currentPageUrl = window.location.href;
+
+                // Überprüfen, ob es sich um die "login.html" handelt
+                if (currentPageUrl.includes('login.html')) {
+                    // Element auf der "login.html" ausblenden
+                    adminTxtElement.style.display = 'none';
+                }
+            }
+        });
+    </script> -->
 
     <header>
         <div id="replace_with_navbar">
@@ -74,6 +92,14 @@
                                     style="color: rgb(211, 211, 211); font-size: 40px;">
                                     <i class="bi bi-box-arrow-in-right"></i>
                                 </a>
+                            </li>
+                            <li>
+                                <div class="admintxt" style="font-size: 33px; padding: 14px; color: rgb(250, 201, 4);">
+                                    <i class="bi bi-terminal"></i>
+                                </div>
+                                <div class="usertxt" style="font-size: 33px; padding: 14px; color: rgb(250, 201, 4);">
+                                    <i class="bi bi-tencent-qq"></i>
+                                </div>
                             </li>
                         </ul>
                     </div>
