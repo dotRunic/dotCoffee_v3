@@ -19,7 +19,7 @@ function userAdminFunction() {
 function userNullFunction() {
     if (localStorage.getItem('user.type') === null) {
         var cssCode = ".bi-bag-dash { display:none; }" +
-                      ".bi-box-arrow-in-right { display: none; }";
+            ".bi-box-arrow-in-right { display: none; }";
         var styleElement = document.createElement('style');
         styleElement.type = 'text/css';
 
@@ -51,3 +51,16 @@ function userUserFunction() {
 
     }
 }
+
+
+function logoutStorage() {
+    localStorage.clear();
+}
+
+// Button-Element auswählen
+var logoutButton = document.getElementById('logouticon');
+
+// Klick-Ereignis dem Button hinzufügen
+logoutButton.addEventListener('click', function () {
+    logoutStorage();
+});
