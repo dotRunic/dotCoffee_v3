@@ -1,0 +1,66 @@
+@RestController
+public class UserController {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    // GET http://localhost:8080/user_form/user_typ - Alle Accounts vom user_typ
+    @GetMapping("/user_form/{userType}")
+    public List<UserModel> findByUserType(@PathVariable String userType) {
+        return userRepository.findByUserType(userType);
+    }
+
+    // GET http://localhost:8080/user_form/user_typ/id - Account vom user_typ + ID
+    @GetMapping("/user_form/{userType}/{id}")
+    public Optional<UserModel> findById(@PathVariable Long id) {
+        return userRepository.findById(id);
+    }
+
+    // GET http://localhost:8080/user_form - Alle Accounts in der user_form Database
+    @GetMapping("/user_form")
+    public List<UserModel> getUsers() {
+        return userRepository.findAll();
+    }
+
+    // POST http://localhost:8080/user_form - Mit nen JSON einen Account hinzufügen
+    @PostMapping("/user_form")
+    public ResponseEntity<UserModel> createProduct(@RequestBody UserRequestDTO userRequestDTO) {
+        UserModel userModel = new UserModel(
+                userRequestDTO.getName(),
+                userRequestDTO.getSurname(),
+                userRequestDTO.getEmail_adress(),
+                userRequestDTO.getUserType(),
+                userRequestDTO.getPassword()
+        );
+        userModel = userRepository.save(userModel);
+        return ResponseEntity.created(URI.create("http://localhost:8080/user_form")).body(userModel);
+    }
+
+    // PUT http://localhost:8080/user_form - Mit nen JSON einen Account updaten,
+    // hinzufügen falls null
+    @PutMapping("/user_form/{id}")
+    public ResponseEntity<UserModel> updateUser(@PathVariable Long id, @RequestBody UserRequestDTO userRequestDTO) {
+        UserModel existingUser = userRepository.findById(id).orElse(null);
+        if (existingUser == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            existingUser.setName(userRequestDTO.getName());
+            existingUser.setSurname(userRequestDTO.getSurname());
+            existingUser.setemail_adress(userRequestDTO.getEmail_adress());
+            existingUser.setpassword(userRequestDTO.getPassword());
+            existingUser.setuser_type(userRequestDTO.getUserType());
+            existingUser = userRepository.save(existingUser);
+            return ResponseEntity.ok(existingUser);
+        }
+    }
+
+    // DELETE http://localhost:8080/
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        UserModel existingUser = userRepository.findById(id).orElse(null);
+        if (existingUser == null) {
+            return ResponseEntity.notFound().build();
+        }
+        userRepository.delete(existingUser);
+        return ResponseEntity.noContent().build();
+    }
