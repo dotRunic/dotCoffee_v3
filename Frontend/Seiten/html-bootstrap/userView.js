@@ -3,7 +3,7 @@ function userAdminFunction() {
         var cssCode = ".bi-person { display:none; }";
         var styleElement = document.createElement('style');
         styleElement.type = 'text/css';
-        console.log("logged in as a Admin");
+        console.log("Login - Admin");
         if (styleElement.styleSheet) {
             // Für den Internet Explorer
             styleElement.styleSheet.cssText = cssCode;
@@ -22,7 +22,7 @@ function userNullFunction() {
             ".bi-box-arrow-in-right { display: none; }";
         var styleElement = document.createElement('style');
         styleElement.type = 'text/css';
-        console.log("not logged in");
+        console.log("Not logged in");
         if (styleElement.styleSheet) {
             styleElement.styleSheet.cssText = cssCode;
         } else {
@@ -39,7 +39,7 @@ function userUserFunction() {
         var cssCode = ".bi-person { display:none; }";
         var styleElement = document.createElement('style');
         styleElement.type = 'text/css';
-        console.log("logged in as a User");
+        console.log("Login - User");
         if (styleElement.styleSheet) {
             // Für den Internet Explorer
             styleElement.styleSheet.cssText = cssCode;
