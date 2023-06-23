@@ -54,7 +54,7 @@ function userUserFunction() {
 
 function logoutStorage() {
     localStorage.clear();
-    // console.log("localStorage flushed");
+    console.log("localStorage - flushed");
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (navItem !== null) {
             // <i>-Element mit der Klasse 'bi-box-arrow-in-right' im <li>-Element finden
             var logoutButton = navItem.querySelector('.bi-box-arrow-in-right');
-
+            
             // Überprüfen, ob das <i>-Element gefunden wurde
             if (logoutButton !== null) {
                 // Klick-Ereignis dem Button hinzufügen
