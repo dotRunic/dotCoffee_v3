@@ -51,3 +51,15 @@ function userUserFunction() {
 
     }
 }
+
+function logoutStorage() {
+    localStorage.clear();
+}
+
+// Button-Element auswählen
+var logoutButton = document.getElementById('logouticon');
+
+// Klick-Ereignis dem Button hinzufügen
+logoutButton.addEventListener('click', function () {
+    logoutStorage();
+});
