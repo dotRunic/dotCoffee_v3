@@ -103,7 +103,7 @@ const createProductsDetails = (productData) => {
             </div>`
     } else {
         productDetails = `<div  style="text-align:center;">
-                    <h1 class="display-6">Es wurde keine Produkte gefunden!</h1>
+                    <h1 class="display-6">Es wurden keine Produkte gefunden!</h1>
                     <br>
                     </div>`
     }
