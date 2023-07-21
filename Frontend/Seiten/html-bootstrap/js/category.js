@@ -39,7 +39,7 @@ const createCategories = (categoriesData) => {
         })
     } else {
            categories = `<div  style="text-align:center;">
-                    <h1 class="display-6">Es wurde keine Categories gefunden!</h1>
+                    <h1 class="display-6">Es wurden keine Kategorien gefunden!</h1>
                     <br>
                     </div>`
     }
