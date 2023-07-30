@@ -31,8 +31,8 @@ function logoutStorage() {
     console.log("localStorage - flushed");
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
         var navItem = document.querySelector('.nav-item');
         if (navItem !== null) {
             var logoutButton = navItem.querySelector('.bi-box-arrow-in-right');
@@ -43,6 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }, 100);
-    
+
     updateUserView();
 });
