@@ -113,6 +113,7 @@ const createProductsDetails = (productData) => {
                 <h1 class="display-6">Es wurden keine Produkte gefunden!</h1>
                 <br>
             </div>`;
+            
     }
     return productDetails;
 };
