@@ -1,6 +1,7 @@
 
 function loadUsers() {
     $.ajax({
+        // url: "http://localhost:8080/admin/user",
         url: "http://localhost:8080/users",
         method: "GET",
         headers: { "Authorization": sessionStorage.getItem("token") },
