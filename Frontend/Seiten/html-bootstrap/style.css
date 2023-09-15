@@ -40,6 +40,13 @@ body {
     color:#fff;
 }
 
+@media screen and (max-width: 768px) {
+    .story {
+        font-size: 20px !important;
+    }
+}
+
+
 @media only screen and (max-width: 600px) {
     .help-text {
         font-size: 20px;
