@@ -39,7 +39,7 @@ public class DbInit implements CommandLineRunner {
                         .setFirstname("Admin")
                         .setLastname("Admin")
                         .setUserType(UserType.admin)
-                        .setPassword(passwordEncoder.encode("admin"))
+                        .setPassword("admin")
                         .setEnabled(true);
 
                 user = new User()
@@ -48,7 +48,7 @@ public class DbInit implements CommandLineRunner {
                         .setFirstname("Lars")
                         .setLastname("Müller")
                         .setUserType(UserType.user)
-                        .setPassword(passwordEncoder.encode("user"))
+                        .setPassword("user")
                         .setEnabled(true);
 
                 userService.createUser(admin);

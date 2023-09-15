@@ -19,8 +19,10 @@
         crossorigin="anonymous"></script>
     <script src="userView.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"
-        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="/Frontend/Img/coffee_logo/logo.png">
+    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="js/navbar.js"></script>
+    <link rel="shortcut icon" href="/Frontend/Img/coffee_logo/logo_v3">
+
 </head>
 
 
@@ -28,7 +30,6 @@
     <header>
         <div id="replace_with_navbar"></div>
     </header>
-    <br>
     <div class="title" style="text-align:center;">
         <h1>Wilkommen zur Kontakt Seite</h1>
         <br>
@@ -89,14 +90,15 @@
         </div>
     </div>
     <br>
-    <div id="replace_with_footer">
-        <script src="navbar.js"></script>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div id="replace_with_footer">
+                    <script src="js/navbar.js"></script>
+                </div>
+            </div>
+        </div>
     </div>
-    <script>userAdminFunction();</script>
-    <script>userNullFunction();</script>
-    <script>userUserFunction();</script>
-    <script>console.log(localStorage)</script>
-    <script>console.log(sessionStorage);</script>
 </body>
 
 </html>

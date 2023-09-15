@@ -19,8 +19,9 @@
         crossorigin="anonymous"></script>
     <script src="userView.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"
-        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="/Frontend/Img/coffee_logo/logo.png">
+    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="js/navbar.js"></script>
+    <link rel="shortcut icon" href="/Frontend/Img/coffee_logo/logo_v3">
 </head>
 
 
@@ -29,7 +30,6 @@
     <header>
         <div id="replace_with_navbar"></div>
     </header>
-    <br>
     <div class="title" style="text-align:center;">
         <h1>Wilkommen zur Login Seite</h1>
         <br>
@@ -39,10 +39,10 @@
             <form  id="login-form">
                 <div class="col-6">
                     <div class="alert alert-danger" role="alert" id="login-error-alert">
-                        <p><small>username or password invalid!</small></p>
+                        <p><small>Your username or password invalid!</small></p>
                     </div>
                     <div class="alert alert-success"  role="alert" id="register-success-alert">
-                        <p><small>you are now registered. please log In!</small></p>
+                        <p><small>You are now registered. Please Log-in!</small></p>
                     </div>
                 </div>
                 <div class="col-6">
@@ -67,14 +67,9 @@
     </div>
     <br>
     <div id="replace_with_footer">
-        <script src="navbar.js"></script>
+        <script src="js/navbar.js"></script>
         <script src="js/login.js"></script>
     </div>
-    <script>userAdminFunction();</script>
-    <script>userNullFunction();</script>
-    <script>userUserFunction();</script>
     <script>logoutStorage();</script>
-    <script>console.log(localStorage)</script>
-    <script>console.log(sessionStorage);</script>
 </body>
 </html>
