@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 body {
-    padding: 25px;
+    /* padding: 25px; */
     background-image: url(/Frontend/Img/light-scratched-concrete-wall-texture-with-coffee-beans-corner_124507-10556.avif);
     background-color: rgb(30, 0, 255);
     color: rgb(0, 0, 0);
