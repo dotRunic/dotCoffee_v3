@@ -16,5 +16,3 @@ Hallo zusammen, das Projekt stellt einen Coffee-Webshop von Michael (https://git
 +++++++++++++++++++++++++++++++++++++++
 
 # 2) Software Lifecycle Semesterprojekt
-
-test
