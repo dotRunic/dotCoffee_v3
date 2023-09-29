@@ -1,4 +1,4 @@
-package com.waff.rest.demo;
+package com.waff.rest.demo.java;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
