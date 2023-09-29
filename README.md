@@ -6,11 +6,11 @@
 
 
 # 1) Das Webshop projekt "dotCoffee"
-![1_Datenbank](https://github.com/anasm20/Software_Lifecycle_Semesterprojekt/assets/112882511/4940a221-aa1d-430a-9a7e-f6486e45faeb)
 Dieses Projekt stellt einen Kaffee-Webshop von Michael (https://github.com/GitMichaGit) und Anas dar. 
 Es handelt sich um ein Open-Source-Projekt, sodass jeder den Code teilweise oder vollständig verwenden und weiterentwickeln kann.
 
 ### - Um das Projekt nutzen zu können, benötigen Sie eine Datenbank namens 'dotCoffee', auf welche Sie über das Programm 'XAMPP' zugreifen können.
+![1_Datenbank](https://github.com/anasm20/Software_Lifecycle_Semesterprojekt/assets/112882511/4940a221-aa1d-430a-9a7e-f6486e45faeb)
 
 
 ### - Danach müssen Sie die "Application.java", welche im Backend Ordner zufinden ist ausführen.
