@@ -9,8 +9,8 @@
 }
 
 body {
-    background-image: url(/Frontend/Img/Background.jpg);
-    background-color: rgb(30, 0, 255);
+    /* background-image: url(/Frontend/Img/Background.jpg); */
+    /* background-color: rgb(30, 0, 255); */
     color: rgb(0, 0, 0);
     font-size: 25px;
     background-repeat: no-repeat;
