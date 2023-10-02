@@ -56,7 +56,8 @@ public class LoginRegisterController {
             HttpSession session = httpRequest.getSession(true);
             // save authenticated context in the session
             session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, securityContext);
-
+            // add session to the response
+            httpRequest.getSession(true);
             return ResponseEntity.ok(principal.getUser());
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

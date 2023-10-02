@@ -22,7 +22,7 @@ const getProductsDataByFilter = (titel, category) => {
             }
         },
         error: function (xhr, status, error) {
-            console.log('error', error)
+            alert('error', error)
         }
     });
 }
@@ -73,7 +73,7 @@ const getProductsById = (id) => {
             }
         },
         error: function (xhr, status, error) {
-            console.log('error', error)
+            alert('error', error)
         }
     });
 }
@@ -136,7 +136,7 @@ const addToCart = (productId) => {
                 }
             },
             error: function (xhr, status, error) {
-                console.log('error', error)
+                alert('error', error)
             }
         });
 

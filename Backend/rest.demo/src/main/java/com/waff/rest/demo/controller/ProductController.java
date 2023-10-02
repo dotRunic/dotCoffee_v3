@@ -12,24 +12,20 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
 public class ProductController {
 
     private final ProductService productService;
-    private final CategoryService categoryService;
     private final ModelMapper modelMapper;
 
     public ProductController(ProductService productService, CategoryService categoryService, ModelMapper modelMapper) {
         this.productService = productService;
-        this.categoryService = categoryService;
         this.modelMapper = modelMapper;
     }
 
@@ -47,6 +43,7 @@ public class ProductController {
 
     @PostMapping(value = "/admin/product", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<Product> createCategory(@Valid @ModelAttribute ProductDto productDto, BindingResult result) {
+
         Product product = modelMapper.map(productDto, Product.class);
         if(StringUtils.isNotBlank(productDto.getCategoryId())) {
             product.setCategory(new Category().setId(productDto.getCategoryId()));
@@ -69,7 +66,6 @@ public class ProductController {
         }
     }
 
-
     @PutMapping(value = "/admin/product/{id}", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<Product> updateProduct(@Valid @ModelAttribute ProductDto productDto, BindingResult result) {
         Product product = modelMapper.map(productDto, Product.class);
@@ -80,7 +76,6 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
-
 
     @DeleteMapping("/admin/product/{id}")
     public ResponseEntity<Void> deleteProductById(@PathVariable String id) {

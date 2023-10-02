@@ -39,6 +39,7 @@ public class UserDto {
     private boolean enabled = true;
 
     public UserDto() {
+        this.userType = UserType.admin;
     }
 
     public String getId() {
@@ -113,5 +114,20 @@ public class UserDto {
     public UserDto setEnabled(boolean enabled) {
         this.enabled = enabled;
         return this;
+    }
+
+    // tostring
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id='" + id + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", userType=" + userType +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                '}';
     }
 }

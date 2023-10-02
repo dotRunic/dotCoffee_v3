@@ -1,14 +1,10 @@
 package com.waff.rest.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity(name = "products")
 public class Product {
@@ -28,7 +24,6 @@ public class Product {
     @Column(name = "image_path")
     private String imagePath;
 
-    @Pattern(regexp = "(\\d+,\\d{1,2})")
     @Column(name = "price")
     private String price;
 
@@ -39,7 +34,6 @@ public class Product {
     @PositiveOrZero
     @Transient
     private int quantity;
-
 
     public String getId() {
         return id;

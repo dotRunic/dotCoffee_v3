@@ -1,16 +1,12 @@
 package com.waff.rest.demo.service;
 
-import com.waff.rest.demo.dto.ProductDto;
-import com.waff.rest.demo.model.Category;
 import com.waff.rest.demo.model.Product;
 import com.waff.rest.demo.model.ProductFilter;
-import com.waff.rest.demo.repository.CategoryRepository;
 import com.waff.rest.demo.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.apache.commons.lang3.StringUtils;
-import org.modelmapper.ModelMapper;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,7 +50,6 @@ public class ProductService {
      * @return new created product
      */
     public Optional<Product> createProduct(@Valid Product product, MultipartFile image) {
-
         if (product.getId() == null || !productRepository.existsById(product.getId())) {
             if(image != null){
                 String filename = image.getOriginalFilename();
@@ -81,10 +76,13 @@ public class ProductService {
             var existingPath = existingProduct.getImagePath();
             if(image != null) {
                 var filename = image.getOriginalFilename();
-                var path = "/".concat(storageService.getStorageConfig().getLocation()).concat("/").concat(filename);
+                String path = "/".concat(storageService.getStorageConfig().getLocation()).concat("/").concat(filename);
                 product.setImagePath(path);
                 storageService.storeDocument(image, filename);
+                if (StringUtils.isNotBlank(existingPath))
                 storageService.deleteDocument(existingPath);
+            }else{
+                product.setImagePath(existingPath);
             }
             var saved = productRepository.save(product);
             return Optional.of(saved);

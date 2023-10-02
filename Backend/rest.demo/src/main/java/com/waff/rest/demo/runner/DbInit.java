@@ -5,7 +5,10 @@ import com.waff.rest.demo.service.CartService;
 import com.waff.rest.demo.service.CategoryService;
 import com.waff.rest.demo.service.ProductService;
 import com.waff.rest.demo.service.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,9 @@ public class DbInit implements CommandLineRunner {
     private final CartService cartService;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     public DbInit(UserService userService, CategoryService categoryService, ProductService productService, CartService cartService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.categoryService = categoryService;
@@ -28,6 +34,7 @@ public class DbInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+
         try {
             //userService.deleteUsers();
             User admin = null;
@@ -122,6 +129,8 @@ public class DbInit implements CommandLineRunner {
                 Cart cart = cartService.getCartByUserId(user.getId()).get();
                 cartService.addItemToCart(cart.getId(), arabica_250.getId());
                 cartService.addItemToCart(cart.getId(), arabica_750.getId());
+
+                jdbcTemplate.execute("SET FOREIGN_KEY_CHECKS=0");
 
             }
         } catch (Exception e ){

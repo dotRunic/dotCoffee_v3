@@ -4,14 +4,11 @@ function updateUserView() {
 
     if (userType === 'admin') {
         cssCode = ".bi-person { display:none; }" + ".usertxt {display: none;}";
-        console.log("Login - Admin");
     } else if (userType === 'user') {
         cssCode = ".bi-person { display:none; }" + ".admintxt { display: none;}" + ".admindashboard {display:none;}";
-        console.log("Login - User");
     } else {
         cssCode = ".bi-bag-dash { display:none; }" +
             ".bi-box-arrow-in-right { display: none; }" + ".admintxt { display: none;}" + ".usertxt {display: none;}" + ".admindashboard {display:none;}";
-        console.log("Not logged in");
     }
 
     var styleElement = document.createElement('style');

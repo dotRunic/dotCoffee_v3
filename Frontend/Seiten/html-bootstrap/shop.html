@@ -19,7 +19,7 @@
         crossorigin="anonymous"></script>
     <script src="userView.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.js"
-    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
     <script src="js/navbar.js"></script>
     <link rel="shortcut icon" href="/Frontend/Img/coffee_logo/logo_v3">
 </head>
@@ -28,14 +28,45 @@
     <header>
         <div id="replace_with_navbar"></div>
     </header>
-    <div class="title" style="text-align: center">
-        <h1>Wilkommen zu unseren Shop</h1>
-        <br>
-    </div>
-    <div class="container">
-        <div class="row" id="categories">
+    <div class="container title">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <h1>Welcome to Our Shop</h1>
+            </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <div id="alert_placeholder"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <h1 class="p-2 rounded sub-title">Unsere Kategorien</h1>
+    </div>
+
+    <!-- Categories -->
+    <div class="container mt-4">
+        <div class="row" id="categories">
+            <!-- Category cards will be inserted here using JavaScript -->
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="container mt-3">
+            <h1 class="p-2 rounded sub-title" id="productTitle">Unsere Produkte</h1>
+        </div>
+    </div>
+
+    <!-- Products -->
+    <div class="container p-4 mt-4 rounded-3">
+        <div class="row" id="products">
+            <!-- Product cards will be inserted here using JavaScript -->
+        </div>
+    </div>
+
     <br>
     <div class="container">
         <div class="row">
@@ -43,10 +74,11 @@
                 <div id="replace_with_footer">
                     <script src="js/navbar.js"></script>
                     <script type="module" src="js/env.js"></script>
-                    <script src="js/category.js"></script>
+                    <script src="js/shop.js"></script>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>
