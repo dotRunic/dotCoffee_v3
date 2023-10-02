@@ -2,7 +2,6 @@ package com.waff.rest.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -21,90 +20,114 @@ import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.Arrays;
 
-import static com.waff.rest.demo.controller.UserController.*;
-import static com.waff.rest.demo.model.UserType.*;
+import static com.waff.rest.demo.model.UserType.admin;
+import static com.waff.rest.demo.model.UserType.user;
 
 @Configuration
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfig {
 
-    private static final String[] SWAGGER_WHITELIST = {
-            "/v3/api-docs/**",
-            "/swagger-ui/**",
-            "/swagger-ui.html"
-    };
+        private static final String[] SWAGGER_WHITELIST = {
+                        "/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html"
+        };
 
-    private static final String[] ADMIN_WHITELIST = {
-            "/user/**",
-            "/swagger-ui/**",
-            "/swagger-ui.html"
-    };
+        private static final String[] ADMIN_WHITELIST = {
+                        "/user/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html",
+                        "/admin/**",
+        };
 
-    private static final String[] ANONYMOUS_WHITELIST = {
-            "/register",
-            "/login",
-            "/logout"
-    };
+        private static final String[] ANONYMOUS_WHITELIST = {
+                        "/register",
+                        "/login",
+                        "/logout",
+        };
 
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http, DaoAuthenticationProvider daoAuthenticationProvider,
+                        StorageConfig storageConfig) throws Exception {
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, DaoAuthenticationProvider daoAuthenticationProvider, StorageConfig storageConfig) throws Exception {
+                http.logout()
+                                .logoutUrl("/logout")
+                                .logoutSuccessUrl("/")
+                                .invalidateHttpSession(true)
+                                .deleteCookies("JSESSIONID");
 
-        http.logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");
+                http.csrf().disable();
+                // https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/dao-authentication-provider.html
+                // authenticationProvider
+                http.authenticationProvider(daoAuthenticationProvider);
+                // basic authentication
+                http.httpBasic();
+                // session management
+                http.sessionManagement(management -> management
+                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                                .maximumSessions(1));
+                // form login
+                http.formLogin().disable();
+                // .defaultSuccessUrl("/swagger-ui/index.html");
 
-        http.csrf().disable();
-        // https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/dao-authentication-provider.html
-        // authenticationProvider
-        http.authenticationProvider(daoAuthenticationProvider);
-        // basic authentication
-        http.httpBasic();
-        // session management
-        http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .maximumSessions(1);
-        // form login
-        http.formLogin().disable();
-                //.defaultSuccessUrl("/swagger-ui/index.html");
+                http.cors(cors -> {
+                        org.springframework.web.cors.CorsConfigurationSource source = request -> {
+                                var config = new org.springframework.web.cors.CorsConfiguration();
+                                config.setAllowedOrigins(Arrays.asList("*"));
+                                config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                                config.setAllowedHeaders(Arrays.asList("*"));
+                                return config;
+                        };
+                        cors.configurationSource(source);
+                });
 
-        // config access with authorities
-        http.authorizeHttpRequests()
-                .requestMatchers(SWAGGER_WHITELIST).hasAnyAuthority(admin.name(), user.name())
-                .requestMatchers(Arrays.stream(ANONYMOUS_WHITELIST)
-                        .map(AntPathRequestMatcher::antMatcher)
-                        .toArray(RequestMatcher[]::new)).permitAll()
-                .requestMatchers( "/admin/**").hasAnyAuthority(admin.name())
-                .requestMatchers(storageConfig.getLocationPathPattern()).permitAll()
-                .requestMatchers(HttpMethod.POST, "/user").permitAll()
-                .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/product/search/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/category/**").permitAll()
-                .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                .anyRequest().authenticated();
+                // config access with authorities
+                http.authorizeHttpRequests()
+                                .requestMatchers(SWAGGER_WHITELIST).hasAnyAuthority(admin.name(), user.name())
+                                .requestMatchers(Arrays.stream(ANONYMOUS_WHITELIST)
+                                                .map(AntPathRequestMatcher::antMatcher)
+                                                .toArray(RequestMatcher[]::new))
+                                .permitAll()
+                                .requestMatchers("/admin/**").hasAnyAuthority(admin.name())
+                                // how it checks the authorities, like what does it look for in request
+                                // in request you need to include the authorities
+                                // like in the header you need to include the authorities
+                                // in this way:
+                                // fetch('http://localhost:8080/admin/user', {
+                                // method: 'GET',
+                                // headers: {
+                                // 'Content-Type': 'application/json',
+                                // 'Authorization': 'Basic ' + btoa('admin:admin')
+                                // 
+                                .requestMatchers(storageConfig.getLocationPathPattern()).permitAll()
+                                .requestMatchers(HttpMethod.POST, "/user").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/product/search/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/category/**").permitAll()
+                                .requestMatchers(HttpMethod.OPTIONS).permitAll()
+                                .anyRequest().authenticated();
 
-        return http.build();
-    }
+                return http.build();
+        }
 
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider(UserDetailsService userDetailsService, UserDetailsPasswordService userDetailsPasswordService){
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        daoAuthenticationProvider.setUserDetailsPasswordService(userDetailsPasswordService);
-        return daoAuthenticationProvider;
-    }
+        @Bean
+        public DaoAuthenticationProvider daoAuthenticationProvider(UserDetailsService userDetailsService,
+                        UserDetailsPasswordService userDetailsPasswordService) {
+                DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+                daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+                daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+                daoAuthenticationProvider.setUserDetailsPasswordService(userDetailsPasswordService);
+                return daoAuthenticationProvider;
+        }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-    @Bean
-    public SessionRegistry sessionRegistry() {
-        return new SessionRegistryImpl();
-    }
+        @Bean
+        public SessionRegistry sessionRegistry() {
+                return new SessionRegistryImpl();
+        }
 
 }

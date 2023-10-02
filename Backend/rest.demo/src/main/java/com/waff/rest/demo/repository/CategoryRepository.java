@@ -1,7 +1,6 @@
 package com.waff.rest.demo.repository;
 
 import com.waff.rest.demo.model.Category;
-import com.waff.rest.demo.model.User;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.jpa.repository.JpaRepository;
 

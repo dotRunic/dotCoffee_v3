@@ -3,16 +3,10 @@ package com.waff.rest.demo.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
-import java.util.UUID;
 
 @Entity(name = "users")
 public class User {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id", nullable = false)
@@ -34,19 +28,18 @@ public class User {
     @Column(name = "email_address", unique = true)
     private String email;
 
-    @NotNull
-    @Column(name = "user_type")
+    @Column(name = "user_type", nullable = true)
     private UserType userType;
 
     @Size(min=2, max=64)
     @Column(name = "password")
-    @JsonIgnore
     private String password;
 
     @Column(name = "enabled")
     private boolean enabled;
 
     public User() {
+        userType = UserType.user;
     }
 
     public String getId() {
