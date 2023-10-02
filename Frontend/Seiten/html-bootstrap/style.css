@@ -9,8 +9,13 @@
 }
 
 body {
+<<<<<<< HEAD
     background-image: url(/Frontend/Img/Background.jpg);
     background-color: rgb(30, 0, 255);
+=======
+    /* background-image: url(/Frontend/Img/Background.jpg); */
+    /* background-color: rgb(30, 0, 255); */
+>>>>>>> 1a903fdd83221df5e25d1386ceee556b2c0046ee
     color: rgb(0, 0, 0);
     font-size: 25px;
     background-repeat: no-repeat;
