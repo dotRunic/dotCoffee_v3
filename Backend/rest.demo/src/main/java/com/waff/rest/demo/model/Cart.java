@@ -16,13 +16,14 @@ public class Cart {
     @JoinColumn(name = "user_id", unique = true)
     private User user;
 
-
     @ManyToMany
-    @JoinColumn(name = "product_id")
+    @JoinTable(
+        name = "cart_items",
+        joinColumns = @JoinColumn(name = "cart_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     private Set<Product> items = new HashSet<>();
 
-
-    @Pattern(regexp = "(\\d+,\\d{1,2})")
     @Column(name = "costs")
     private String costs;
 

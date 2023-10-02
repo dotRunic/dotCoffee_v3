@@ -1,7 +1,6 @@
 package com.waff.rest.demo.service;
 
 import com.waff.rest.demo.config.StorageConfig;
-import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
@@ -32,11 +31,12 @@ public class StorageService {
 
     public void storeDocument(MultipartFile file, String name) {
         Path resolve = this.location.resolve(name);
+        logger.info("File name: {}", file.getOriginalFilename());
         if(!Files.exists(resolve)) {
             try {
                 Files.copy(file.getInputStream(), resolve);
             } catch (IOException e) {
-                // TODO
+                System.out.println(e.getMessage());
             }
         }
     }
@@ -53,7 +53,7 @@ public class StorageService {
             try {
                 Files.delete(resolve);
             } catch (IOException e) {
-                // TODO
+                System.out.println(e.getMessage());
             }
         }
     }

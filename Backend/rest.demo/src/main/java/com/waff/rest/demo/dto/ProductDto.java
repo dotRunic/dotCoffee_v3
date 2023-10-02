@@ -1,11 +1,7 @@
 package com.waff.rest.demo.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.waff.rest.demo.model.Category;
-import jakarta.annotation.Nullable;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +21,6 @@ public class ProductDto {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private MultipartFile image;
 
-    @Pattern(regexp = "(\\d+,\\d{1,2})")
     private String price;
 
     private String categoryId;

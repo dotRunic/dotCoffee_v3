@@ -120,4 +120,9 @@ public class UserService {
     public boolean hasUsers() {
         return userRepository.count() > 0L;
     }
+
+
+    public User getUserByUsername(String string) {
+        return userRepository.findUserByUsername(string);
+    }
 }

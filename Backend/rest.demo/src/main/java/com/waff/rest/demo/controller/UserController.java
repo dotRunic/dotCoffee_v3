@@ -1,22 +1,18 @@
 package com.waff.rest.demo.controller;
-
 import java.util.List;
-
 import com.waff.rest.demo.dto.UserDto;
 import com.waff.rest.demo.model.UserType;
 
+import org.hibernate.sql.results.LoadingLogger_.logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
 import com.waff.rest.demo.model.User;
 import com.waff.rest.demo.service.UserService;
-
 import jakarta.validation.Valid;
-
 import static com.waff.rest.demo.model.UserType.admin;
 
 @RestController
@@ -39,11 +35,6 @@ public class UserController {
     @PostMapping("/user")
     public ResponseEntity<User> createUser(@Valid @RequestBody UserDto userDto) {
         User user = modelMapper.map(userDto, User.class);
-        boolean isAdmin = SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(admin.name());
-        // For security reasons, a normal user can't change any user to an admin user
-        if (user.getUserType() == admin && !isAdmin) {
-            user.setUserType(UserType.user);
-        }
         User created = userService.createUser(user).orElse(null);
         if (created != null) {
             return new ResponseEntity<>(created, HttpStatus.CREATED);
@@ -63,13 +54,8 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
-    public ResponseEntity<User> updateUser(@Valid @RequestBody UserDto userDto) {
+    public ResponseEntity<User> updateUser(@Valid @RequestBody UserDto userDto) {        
         User user = modelMapper.map(userDto, User.class);
-        boolean isAdmin = SecurityContextHolder.getContext().getAuthentication().getAuthorities().contains(admin.name());
-        // For security reasons, a normal user can't change any user to an admin user
-        if (user.getUserType() == admin && !isAdmin) {
-            user.setUserType(UserType.user);
-        }
         User updated = userService.updateUser(user).orElse(null);
         if (updated != null) {
             return new ResponseEntity<>(updated, HttpStatus.OK);
